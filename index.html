@@ -494,6 +494,177 @@ width: 100%;
   object-fit: contain;
   margin: 0 auto;
 }
+      
+/* ===== PaPa Gs Cutz Booking System ===== */
+
+.booking-section {
+  padding: 64px 18px;
+  background: #071d18;
+  color: #ffffff;
+}
+
+.booking-section .section-heading {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.booking-section .eyebrow {
+  color: #19b765;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.booking-section h2 {
+  color: #ffffff;
+  margin: 10px 0;
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1.15;
+}
+
+.booking-section .section-heading p {
+  color: #d5e4dc;
+  line-height: 1.6;
+}
+
+.booking-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 22px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.booking-form,
+.booking-summary {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid rgba(25, 183, 101, 0.35);
+  border-radius: 18px;
+  background: #102e27;
+  box-sizing: border-box;
+}
+
+.booking-form label {
+  display: block;
+  margin-bottom: 17px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  border: 1px solid #477363;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #071d18;
+  font: inherit;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.booking-form textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  outline: 3px solid rgba(25, 183, 101, 0.35);
+  border-color: #19b765;
+}
+
+.booking-submit {
+  width: 100%;
+  min-height: 50px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #19b765;
+  color: #071d18;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.booking-submit:hover {
+  background: #36d982;
+}
+
+.booking-small,
+.booking-note {
+  color: #c8ddd2;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.booking-summary h3 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+}
+
+.summary-row span {
+  color: #c8ddd2;
+}
+
+.summary-row strong {
+  max-width: 60%;
+  text-align: right;
+  overflow-wrap: anywhere;
+  color: #ffffff;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 16px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.summary-total strong {
+  color: #36d982;
+}
+
+.booking-note {
+  margin-top: 18px;
+}
+
+@media (max-width: 700px) {
+  .booking-section {
+    padding: 45px 14px;
+  }
+
+  .booking-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form,
+  .booking-summary {
+    padding: 18px;
+  }
 
     }
   </style>
@@ -631,6 +802,123 @@ href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21%20I%27d%20like%20t
       </div>
     </section>
 
+<section class="booking-section" id="booking">
+  <div class="section-heading">
+    <div class="eyebrow">BOOK YOUR NEXT CUT</div>
+    <h2>Choose Your Cutz Time.</h2>
+    <p>Choose your haircut, date and time, then send your request to WhatsApp.</p>
+  </div>
+
+  <div class="booking-wrap">
+    <form class="booking-form" id="bookingForm">
+      <label for="bookingService">Choose your service
+        <select id="bookingService" required>
+          <option value="">Select a haircut</option>
+          <option value="Dye Cut" data-price="70">Dye Cut — R70</option>
+          <option value="Plain Fade" data-price="45">Plain Fade — R45</option>
+          <option value="Kids Dye Fade" data-price="60">Kids Dye Fade — R60</option>
+          <option value="Kids Plain Fade" data-price="35">Kids Plain Fade — R35</option>
+          <option value="Trim" data-price="12">Trim — R12</option>
+          <option value="Chiskop / Bles" data-price="30">Chiskop / Bles — R30</option>
+        </select>
+      </label>
+
+      <label for="bookingDate">Preferred date
+        <input id="bookingDate" type="date" required>
+      </label>
+
+      <label for="bookingTime">Preferred time
+        <select id="bookingTime" required>
+          <option value="">Select a time</option>
+          <option>7:00 AM</option>
+          <option>7:30 AM</option>
+          <option>8:00 AM</option>
+          <option>8:30 AM</option>
+          <option>9:00 AM</option>
+          <option>9:30 AM</option>
+          <option>10:00 AM</option>
+          <option>10:30 AM</option>
+          <option>11:00 AM</option>
+          <option>11:30 AM</option>
+          <option>12:00 PM</option>
+          <option>12:30 PM</option>
+          <option>1:00 PM</option>
+          <option>1:30 PM</option>
+          <option>2:00 PM</option>
+          <option>2:30 PM</option>
+          <option>3:00 PM</option>
+          <option>3:30 PM</option>
+          <option>4:00 PM</option>
+          <option>4:30 PM</option>
+          <option>5:00 PM</option>
+          <option>5:30 PM</option>
+        </select>
+      </label>
+
+      <label for="bookingName">Your full name
+        <input id="bookingName" type="text"
+          autocomplete="name" maxlength="80"
+          placeholder="Enter your name" required>
+      </label>
+
+      <label for="bookingPhone">Your contact number
+        <input id="bookingPhone" type="tel"
+          autocomplete="tel" maxlength="25"
+          placeholder="Your phone number" required>
+      </label>
+
+      <label for="bookingNotes">Additional notes (optional)
+        <textarea id="bookingNotes" maxlength="300"
+          placeholder="Any special requests?"></textarea>
+      </label>
+
+      <button class="btn btn-green booking-submit" type="submit">
+        Review &amp; Request on WhatsApp
+      </button>
+
+      <p class="booking-small">
+        Your appointment is not confirmed until the barber replies.
+      </p>
+    </form>
+
+    <aside class="booking-summary" aria-live="polite">
+      <h3>Your Booking Summary</h3>
+
+      <div class="summary-row">
+        <span>Service</span>
+        <strong id="summaryService">Not selected</strong>
+      </div>
+      <div class="summary-row">
+        <span>Date</span>
+        <strong id="summaryDate">Not selected</strong>
+      </div>
+      <div class="summary-row">
+        <span>Time</span>
+        <strong id="summaryTime">Not selected</strong>
+      </div>
+      <div class="summary-row">
+        <span>Customer</span>
+        <strong id="summaryName">Not entered</strong>
+      </div>
+      <div class="summary-row">
+        <span>Phone</span>
+        <strong id="summaryPhone">Not entered</strong>
+      </div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <strong id="summaryTotal">R0</strong>
+      </div>
+
+      <p class="booking-note">
+        Your selected time is a preference, not live availability.
+        The barber must check for booking conflicts.
+      </p>
+    </aside>
+  </div>
+</section>
+
+    
     <section id="gallery">
   <div class="section-heading">
     <div class="eyebrow">The craft</div>
@@ -787,6 +1075,109 @@ href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21%20I%27d%20like%20t
     document.getElementById("year").textContent =
       new Date().getFullYear();
   </script>
+
+<script>
+(function () {
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
+
+  const service = document.getElementById("bookingService");
+  const date = document.getElementById("bookingDate");
+  const time = document.getElementById("bookingTime");
+  const name = document.getElementById("bookingName");
+  const phone = document.getElementById("bookingPhone");
+  const notes = document.getElementById("bookingNotes");
+
+  const summaryService = document.getElementById("summaryService");
+  const summaryDate = document.getElementById("summaryDate");
+  const summaryTime = document.getElementById("summaryTime");
+  const summaryName = document.getElementById("summaryName");
+  const summaryPhone = document.getElementById("summaryPhone");
+  const summaryTotal = document.getElementById("summaryTotal");
+
+  // Use the visitor's local date to block past dates.
+  const today = new Date();
+  const localToday = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+
+  date.min = localToday;
+
+  function updateSummary() {
+    const option = service.options[service.selectedIndex];
+    const price = Number(option.dataset.price || 0);
+
+    summaryService.textContent = service.value || "Not selected";
+    summaryDate.textContent = date.value || "Not selected";
+    summaryTime.textContent = time.value || "Not selected";
+    summaryName.textContent = name.value.trim() || "Not entered";
+    summaryPhone.textContent = phone.value.trim() || "Not entered";
+    summaryTotal.textContent = "R" + price;
+  }
+
+  [service, date, time, name, phone].forEach(function (field) {
+    field.addEventListener("input", updateSummary);
+    field.addEventListener("change", updateSummary);
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    if (date.value < localToday) {
+      alert("Please choose today or a future date.");
+      date.focus();
+      return;
+    }
+
+    const selectedOption = service.options[service.selectedIndex];
+    const price = Number(selectedOption.dataset.price || 0);
+    const customerName = name.value.trim();
+    const customerPhone = phone.value.trim();
+
+    if (!customerName || !customerPhone || !price) {
+      alert("Please complete all required booking details.");
+      return;
+    }
+
+    const bookingDate = new Date(date.value + "T12:00:00")
+      .toLocaleDateString("en-ZA", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+    const message = [
+      "💈 *PaPa Gs Cutz — Booking Request*",
+      "",
+      "*Service:* " + service.value,
+      "*Price:* R" + price,
+      "*Preferred date:* " + bookingDate,
+      "*Preferred time:* " + time.value,
+      "*Customer:* " + customerName,
+      "*Contact number:* " + customerPhone,
+      notes.value.trim()
+        ? "*Additional notes:* " + notes.value.trim()
+        : "",
+      "",
+      "Please confirm whether this appointment time is available.",
+      "I understand this is a request and is not confirmed until you reply."
+    ].filter(Boolean).join("\n");
+
+    updateSummary();
+
+    const whatsappURL =
+      "https://wa.me/27781594855?text=" + encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+  });
+
+  updateSummary();
+})();
+</script>
 
 </body>
   </html>
