@@ -667,6 +667,67 @@ width: 100%;
   }
 
     }
+      /* Privacy and booking policy tabs */
+.policy-tabs {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 10px;
+margin: 22px auto 14px;
+}
+
+.policy-tab {
+min-height: 44px;
+padding: 11px 16px;
+border: 1px solid #19b765;
+border-radius: 8px;
+background: transparent;
+color: #ffffff;
+font: inherit;
+font-weight: 800;
+cursor: pointer;
+}
+
+.policy-tab[aria-selected="true"],
+.policy-tab:hover {
+background: #19b765;
+color: #071d18;
+}
+
+.policy-panels {
+max-width: 720px;
+margin: 0 auto;
+text-align: left;
+}
+
+.policy-panel {
+padding: 18px;
+border: 1px solid #19b765;
+border-radius: 10px;
+background: #102e27;
+color: #e3eee8;
+font-size: 13px;
+line-height: 1.7;
+}
+
+.policy-panel[hidden] {
+display: none;
+}
+
+.policy-panel h3 {
+margin-bottom: 8px;
+color: #19b765;
+font-size: 17px;
+}
+
+.policy-panel p + p {
+margin-top: 10px;
+}
+
+.policy-tab:focus-visible {
+outline: 3px solid #ffffff;
+outline-offset: 3px;
+}
   </style>
 </head>
 
@@ -1058,6 +1119,30 @@ href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21%20I%27d%20like%20t
     <p><strong>PaPa Gs Cutz</strong> ✂</p>
     <p>GOOD CUTZ don't worry be happy.</p>
     <p>36 Ingelson Crescent, Windmill Park, Boksburg.</p>
+    <div class="policy-tabs" role="tablist" aria-label="Website policies">
+  <button class="policy-tab" id="privacyTab" type="button"
+    role="tab" aria-selected="true" aria-controls="privacyPanel">
+    Privacy Notice
+  </button><button class="policy-tab" id="bookingPolicyTab" type="button"
+role="tab" aria-selected="false" aria-controls="bookingPolicyPanel" tabindex="-1">
+Booking Policy
+</button>
+
+</div><div class="policy-panels">
+  <section class="policy-panel" id="privacyPanel" role="tabpanel"
+    aria-labelledby="privacyTab">
+    <h3>Privacy Notice</h3>
+    <p>When you contact PaPa Gs Cutz through WhatsApp to arrange an appointment, you may share your name, phone number, preferred service and appointment details. We use this information to respond to you and manage booking requests.</p>
+    <p>Please avoid sending unnecessary sensitive information. Booking information should be handled responsibly and kept only as long as reasonably needed. WhatsApp is a third-party service, and its own privacy terms also apply.</p>
+    <p>For privacy questions, contact PaPa Gs Cutz through the WhatsApp link on this website.</p>
+  </section>  <section class="policy-panel" id="bookingPolicyPanel" role="tabpanel"
+    aria-labelledby="bookingPolicyTab" hidden>
+    <h3>Booking Policy</h3>
+    <p>Bookings can be requested through the website booking form or WhatsApp. Sending a request does not confirm an appointment. Your appointment is confirmed only when PaPa Gs Cutz replies and agrees to the requested date and time.</p>
+    <p>Selected dates and times are preferences, not live availability. Contact the barber through WhatsApp if you need to change or cancel a booking.</p>
+    <p>Prices are listed in South African rand (R). Please confirm the service, price and availability with the barber.</p>
+  </section>
+</div>
     <p style="margin-top:12px;">
       © <span id="year">2026</span> PaPa Gs Cutz. All rights reserved.
     </p>
@@ -1178,6 +1263,48 @@ href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21%20I%27d%20like%20t
   updateSummary();
 })();
 </script>
+<script>
+(function () {
+  const tabs = [
+    {
+      button: document.getElementById("privacyTab"),
+      panel: document.getElementById("privacyPanel")
+    },
+    {
+      button: document.getElementById("bookingPolicyTab"),
+      panel: document.getElementById("bookingPolicyPanel")
+    }
+  ];
 
+  function activateTab(index, moveFocus) {
+    tabs.forEach(function (tab, i) {
+      const active = i === index;
+      tab.button.setAttribute("aria-selected", String(active));
+      tab.button.tabIndex = active ? 0 : -1;
+      tab.panel.hidden = !active;
+    });
+
+    if (moveFocus) tabs[index].button.focus();
+  }
+
+  tabs.forEach(function (tab, index) {
+    tab.button.addEventListener("click", function () {
+      activateTab(index, false);
+    });
+
+    tab.button.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+
+        const next = event.key === "ArrowRight"
+          ? (index + 1) % tabs.length
+          : (index - 1 + tabs.length) % tabs.length;
+
+        activateTab(next, true);
+      }
+    });
+  });
+})();
+</script>
 </body>
   </html>
