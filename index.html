@@ -57,17 +57,19 @@
     }
 
     header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 16px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 2px solid var(--green);
+background: var(--navy);
+color: var(--white);
+padding: 10px 4%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 8px;
+position: sticky;
+top: 0;
+z-index: 10;
+border-bottom: 2px solid var(--green);
+width: 100%;
     }
 
     .brand {
@@ -489,11 +491,31 @@
       
 .brand-logo {
 display: block;
-width: 65px;
-height: 65px;
+width: 48px;
+height: 48px;
 object-fit: contain;
-margin: 0 auto 8px;
+margin: 0 auto;
+flex-shrink: 0;
+}
+
+.brand {
+text-align: center;
+min-width: 0;
+}
+
+nav {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+align-items: center;
+font-size: 12px;
+font-weight: bold;
 max-width: 100%;
+}
+
+nav a {
+white-space: nowrap;
 }
 
     }
