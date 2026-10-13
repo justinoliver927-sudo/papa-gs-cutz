@@ -1,0 +1,74 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <circle cx="200" cy="200" r="190" fill="#071B33" stroke="#28C76F" stroke-width="8"/>
+  <circle cx="200" cy="200" r="177" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+
+  <!-- Barber head silhouette -->
+  <path d="M145 112
+    Q145 78 180 75
+    Q225 62 251 98
+    L263 129
+    L250 149
+    L255 179
+    L239 201
+    L230 223
+    L170 223
+    L160 197
+    L145 177
+    L150 151
+    L138 135 Z"
+    fill="#FFFFFF"/>
+
+  <!-- Fresh fade and hair -->
+  <path d="M145 132
+    Q133 105 154 83
+    Q179 57 219 75
+    Q247 84 254 112
+    L248 134
+    L232 117
+    L219 95
+    L191 105
+    L164 121 Z"
+    fill="#28C76F"/>
+
+  <!-- Hairline and beard -->
+  <path d="M150 145 Q164 119 187 117
+    Q218 116 239 143"
+    fill="none" stroke="#071B33" stroke-width="7" stroke-linecap="round"/>
+  <path d="M161 180 Q177 193 198 185 Q220 194 238 179
+    L230 209 L210 224 L178 218 L166 201 Z"
+    fill="#071B33"/>
+
+  <!-- Neck and shirt -->
+  <path d="M177 216 L177 234 L153 246
+    L130 265 L270 265 L247 246 L222 234 L222 216"
+    fill="#FFFFFF" stroke="#28C76F" stroke-width="4"/>
+
+  <!-- Barber clipper -->
+  <g transform="translate(103 240) rotate(-30)">
+    <rect x="0" y="0" width="24" height="65" rx="7" fill="#28C76F" stroke="#FFFFFF" stroke-width="3"/>
+    <rect x="3" y="-12" width="18" height="15" rx="2" fill="#FFFFFF"/>
+    <path d="M5 -12 V-20 M12 -12 V-20 M19 -12 V-20" stroke="#28C76F" stroke-width="3"/>
+  </g>
+
+  <!-- Comb -->
+  <g transform="translate(272 238) rotate(30)">
+    <rect x="0" y="0" width="15" height="67" rx="3" fill="#FFFFFF"/>
+    <path d="M2 10 H13 M2 19 H13 M2 28 H13 M2 37 H13 M2 46 H13 M2 55 H13"
+      stroke="#071B33" stroke-width="2"/>
+  </g>
+
+  <!-- Brand name -->
+  <rect x="45" y="274" width="310" height="48" rx="8" fill="#071B33" stroke="#28C76F" stroke-width="3"/>
+  <text x="200" y="305" text-anchor="middle"
+    font-family="Arial, sans-serif" font-size="29" font-weight="900"
+    fill="#FFFFFF">PaPa Gs Cutz</text>
+
+  <!-- Slogan -->
+  <text x="200" y="345" text-anchor="middle"
+    font-family="Arial, sans-serif" font-size="12" font-weight="bold"
+    fill="#28C76F">GOOD CUTZ</text>
+  <text x="200" y="362" text-anchor="middle"
+    font-family="Arial, sans-serif" font-size="11"
+    fill="#FFFFFF">don't worry be happy</text>
+</svg>
