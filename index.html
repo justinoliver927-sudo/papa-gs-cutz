@@ -92,21 +92,25 @@
       color: var(--green);
     }
 
-    .hero {
-      min-height: 560px;
-      display: flex;
-      align-items: center;
-      color: white;
-      padding: 65px 6%;
-      background:
-        linear-gradient(90deg,
-          rgba(4, 22, 17, .96) 0%,
-          rgba(4, 22, 17, .82) 48%,
-          rgba(4, 22, 17, .28) 100%),
-        url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=85")
-        center/cover no-repeat;
-    }
+.hero {
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  padding: 65px 6%;
 
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 18, 14, 0.96) 0%,
+      rgba(4, 18, 14, 0.78) 45%,
+      rgba(4, 18, 14, 0.25) 100%
+    ),
+    url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1800&q=90")
+  
+  center / cover no-repeat;
+}
+    
     .hero-content {
       max-width: 650px;
     }
@@ -616,43 +620,48 @@
     </section>
 
     <section id="gallery">
-      <div class="section-heading">
-        <div class="eyebrow">The craft</div>
-        <h2>Barber Vibes</h2>
-        <p>
-          A little inspiration for your next cut.
-          Replace these sample photos with your own haircut
-          pictures whenever you're ready.
-        </p>
+  <div class="section-heading">
+    <div class="eyebrow">The craft</div>
+    <h2>Fresh Cutz Gallery</h2>
+    <p>
+      Barber culture, clean fades and fresh-cut inspiration.
+      Visit PaPa Gs Cutz in Windmill Park, Boksburg.
+    </p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=85"
+        alt="Professional barber shop and haircut experience"
+        loading="lazy">
+      <div class="gallery-caption">
+        The Barber Experience
       </div>
+    </div>
 
-      <div class="gallery-grid">
-
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80"
-            alt="Barber working in a barbershop"
-            loading="lazy">
-          <div class="gallery-caption">The Barber Experience</div>
-        </div>
-
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=80"
-            alt="Barber tools and haircut styling"
-            loading="lazy">
-          <div class="gallery-caption">Attention to Detail</div>
-        </div>
-
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=80"
-            alt="Barber cutting a client's hair"
-            loading="lazy">
-          <div class="gallery-caption">Fresh-Cut Energy</div>
-        </div>
-
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=85"
+        alt="Barber tools and haircut styling"
+        loading="lazy">
+      <div class="gallery-caption">
+        Precision and Detail
       </div>
+    </div>
+
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=85"
+        alt="Barber working on a haircut"
+        loading="lazy">
+      <div class="gallery-caption">
+        Fresh-Cut Energy
+      </div>
+    </div>
+
+  </div>
     </section>
 
     <section class="about">
