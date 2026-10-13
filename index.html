@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071d18">
+
+  <title>PaPa Gs Cutz | Good Cutz Don't Worry Be Happy</title>
+
+  <meta name="description"
+    content="PaPa Gs Cutz in Windmill Park, Boksburg. Quality fades, dye cuts, kids cuts, trims and chiskop. Open daily from 7am to 6pm.">
+
+  <style>
+    :root {
+      --green: #19b765;
+      --green-dark: #087d43;
+      --navy: #071d18;
+      --navy-light: #102e27;
+      --white: #ffffff;
+      --muted: #b7c8c1;
+      --light: #f2f7f4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--white);
+      color: #14251e;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .topbar {
+      background: var(--green);
+      color: var(--navy);
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 2px solid var(--green);
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      color: var(--green);
+    }
+
+    nav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      color: white;
+      padding: 65px 6%;
+      background:
+        linear-gradient(90deg,
+          rgba(4, 22, 17, .96) 0%,
+          rgba(4, 22, 17, .82) 48%,
+          rgba(4, 22, 17, .28) 100%),
+        url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=85")
+        center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 9vw, 76px);
+      line-height: 1.04;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      color: #e0e9e4;
+      font-size: 17px;
+      max-width: 490px;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 21px;
+      border-radius: 7px;
+      font-weight: 900;
+      font-size: 14px;
+      transition: .2s;
+      min-height: 48px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--navy);
+      color: white;
+      padding: 24px 5%;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .quick-info strong {
+      display: block;
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .quick-info span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section {
+      padding: 65px 6%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin: 0 auto 35px;
+      max-width: 650px;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: #62736a;
+    }
+
+    .services {
+      background: var(--light);
+    }
+
+    .price-grid {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .price-card {
+      background: white;
+      padding: 24px 20px;
+      border-radius: 12px;
+      border: 1px solid #e0e9e3;
+      border-bottom: 4px solid var(--green);
+      box-shadow: 0 5px 18px rgba(7, 29, 24, .04);
+    }
+
+    .service-icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .price-card h3 {
+      color: var(--navy);
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .price-card p {
+      color: #68786f;
+      font-size: 13px;
+      min-height: 40px;
+    }
+
+    .price {
+      color: var(--green-dark);
+      font-size: 29px;
+      font-weight: 900;
+      margin-top: 14px;
+    }
+
+    .price small {
+      font-size: 12px;
+      color: #718078;
+      font-weight: normal;
+    }
+
+    .gallery-grid {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--navy);
+      aspect-ratio: 4 / 5;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      font-weight: bold;
+      padding: 30px 13px 13px;
+      background: linear-gradient(transparent, rgba(0,0,0,.85));
+      font-size: 13px;
+    }
+
+    .about {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+    }
+
+    .about h2 {
+      color: white;
+    }
+
+    .about p {
+      max-width: 650px;
+      margin: 0 auto 22px;
+      color: #c4d4cd;
+    }
+
+    .slogan {
+      color: var(--green);
+      font-weight: 900;
+      font-size: clamp(20px, 4vw, 30px);
+      margin: 25px 0;
+    }
+
+    .contact-grid {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .contact-card {
+      padding: 24px;
+      border: 1px solid #dfe8e2;
+      border-radius: 12px;
+      background: white;
+    }
+
+    .contact-card h3 {
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      overflow-wrap: anywhere;
+      color: #56675e;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .contact-card .btn {
+      margin-top: 5px;
+    }
+
+    footer {
+      background: #04130f;
+      color: #b9c9c1;
+      text-align: center;
+      padding: 28px 15px 95px;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: var(--green);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #20c96a;
+      color: #062016;
+      border-radius: 50px;
+      padding: 13px 18px;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 5px 22px rgba(0,0,0,.25);
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding-left: max(6%, calc((100% - 1150px) / 2));
+      }
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 14px 4%;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      nav {
+        gap: 10px;
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 510px;
+        padding: 55px 6%;
+        background-position: 58% center;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .quick-info {
+        padding: 20px 3%;
+        gap: 8px;
+      }
+
+      .quick-info strong {
+        font-size: 12px;
+      }
+
+      .quick-info span {
+        font-size: 10px;
+      }
+
+      section {
+        padding: 48px 5%;
+      }
+
+      .price-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .price-card {
+        padding: 18px 14px;
+      }
+
+      .price-card h3 {
+        font-size: 15px;
+      }
+
+      .price-card p {
+        font-size: 12px;
+      }
+
+      .price {
+        font-size: 25px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 370px) {
+      nav {
+        gap: 7px;
+        font-size: 10px;
+      }
+
+      .price-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    ✂ OPEN DAILY · 7:00 AM – 6:00 PM · WINDMILL PARK, BOKSBURG
+  </div>
+
+  <header>
+    <a class="brand" href="#home">
+      PaPa Gs <span>Cutz</span> ✂
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#prices">Prices</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">Your local barber · Boksburg</div>
+
+        <h1>
+          GOOD CUTZ.<br>
+          <span>GOOD VIBES.</span>
+        </h1>
+
+        <p>
+          A young, dedicated, self-taught barber bringing you
+          fresh cuts, clean fades and good vibes.
+          Pull up and leave looking fresh!
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-green"
+             href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%2C%20I%27d%20like%20to%20enquire%20about%20a%20cut.">
+            💬 WhatsApp the Barber
+          </a>
+
+          <a class="btn btn-outline" href="#prices">
+            View Price List
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-info">
+      <div>
+        <strong>✂ Fresh Cuts</strong>
+        <span>Every cut counts</span>
+      </div>
+
+      <div>
+        <strong>🕖 7 AM – 6 PM</strong>
+        <span>Daily opening hours</span>
+      </div>
+
+      <div>
+        <strong>📍 Boksburg</strong>
+        <span>Windmill Park</span>
+      </div>
+    </div>
+
+    <section class="services" id="prices">
+      <div class="section-heading">
+        <div class="eyebrow">The price list</div>
+        <h2>Fresh Cutz. Fair Prices.</h2>
+        <p>
+          From clean fades to kids' cuts, find your cut
+          and message us to enquire.
+        </p>
+      </div>
+
+      <div class="price-grid">
+
+        <article class="price-card">
+          <div class="service-icon">🔥</div>
+          <h3>Dye Cut</h3>
+          <p>Fresh cut with a colour finish.</p>
+          <div class="price">R70</div>
+        </article>
+
+        <article class="price-card">
+          <div class="service-icon">💈</div>
+          <h3>Plain Fade</h3>
+          <p>Clean fade without dye.</p>
+          <div class="price">R45</div>
+        </article>
+
+        <article class="price-card">
+          <div class="service-icon">🎨</div>
+          <h3>Kids Dye Fade</h3>
+          <p>A fresh kids' fade with dye.</p>
+          <div class="price">R60</div>
+        </article>
+
+        <article class="price-card">
+          <div class="service-icon">👦</div>
+          <h3>Kids Plain Fade</h3>
+          <p>Kids' fade without dye.</p>
+          <div class="price">R35</div>
+        </article>
+
+        <article class="price-card">
+          <div class="service-icon">✂️</div>
+          <h3>Trim</h3>
+          <p>Simple trim and tidy-up.</p>
+          <div class="price">R12</div>
+        </article>
+
+        <article class="price-card">
+          <div class="service-icon">🪒</div>
+          <h3>Chiskop / Bles</h3>
+          <p>Keep it simple and clean.</p>
+          <div class="price">R30</div>
+        </article>
+
+      </div>
+
+      <div style="text-align:center; margin-top:30px;">
+        <a class="btn btn-green"
+           href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%2C%20please%20help%20me%20choose%20a%20cut.">
+          Ask About a Cut
+        </a>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-heading">
+        <div class="eyebrow">The craft</div>
+        <h2>Barber Vibes</h2>
+        <p>
+          A little inspiration for your next cut.
+          Replace these sample photos with your own haircut
+          pictures whenever you're ready.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80"
+            alt="Barber working in a barbershop"
+            loading="lazy">
+          <div class="gallery-caption">The Barber Experience</div>
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=80"
+            alt="Barber tools and haircut styling"
+            loading="lazy">
+          <div class="gallery-caption">Attention to Detail</div>
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=80"
+            alt="Barber cutting a client's hair"
+            loading="lazy">
+          <div class="gallery-caption">Fresh-Cut Energy</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="eyebrow">More than a haircut</div>
+      <h2>Welcome to PaPa Gs Cutz</h2>
+
+      <p>
+        Young, dedicated and self-taught, always working
+        to improve the craft. Every client deserves respect,
+        effort and a good experience.
+      </p>
+
+      <div class="slogan">GOOD CUTZ don't worry be happy.</div>
+
+      <a class="btn btn-green"
+         href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21">
+        Let's Talk Cutz
+      </a>
+    </section>
+
+    <section id="contact">
+      <div class="section-heading">
+        <div class="eyebrow">Find your barber</div>
+        <h2>Come Through</h2>
+        <p>
+          Get in touch, check the location and enquire
+          about your next cut.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <h3>📍 Find Us</h3>
+          <p>
+            36 Ingelson Crescent,<br>
+            Windmill Park, Boksburg,<br>
+            Gauteng, South Africa.
+          </p>
+
+          <a class="btn btn-green"
+             href="https://www.google.com/maps/search/?api=1&query=36+Ingelson+Crescent+Windmill+Park+Boksburg"
+             target="_blank"
+             rel="noopener noreferrer">
+            Open Google Maps
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h3>💬 WhatsApp</h3>
+          <p>
+            078 159 4855<br>
+            Open daily, 7:00 AM – 6:00 PM.
+          </p>
+
+          <a class="btn btn-green"
+             href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%2C%20I%20want%20to%20enquire%20about%20a%20haircut.">
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h3>📘 Facebook</h3>
+          <p>
+            Follow PaPa Gs Cutz on Facebook
+            for updates and barber content.
+          </p>
+
+          <a class="btn btn-green"
+             href="https://www.facebook.com/share/1FKzMqGPre/"
+             target="_blank"
+             rel="noopener noreferrer">
+            Visit Facebook
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h3>🕖 Opening Hours</h3>
+          <p>
+            Monday – Sunday<br>
+            7:00 AM – 6:00 PM
+          </p>
+          <p>Contact us to confirm availability.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>PaPa Gs Cutz</strong> ✂</p>
+    <p>GOOD CUTZ don't worry be happy.</p>
+    <p>36 Ingelson Crescent, Windmill Park, Boksburg.</p>
+    <p style="margin-top:12px;">
+      © <span id="year">2026</span> PaPa Gs Cutz. All rights reserved.
+    </p>
+  </footer>
+
+  <a class="whatsapp-float"
+     href="https://wa.me/27781594855?text=Hi%20PaPa%20Gs%20Cutz%21"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Contact PaPa Gs Cutz on WhatsApp">
+    💬 WhatsApp
+  </a>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+  </html>
