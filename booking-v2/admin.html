@@ -1,1 +1,101 @@
-<!doctype html><html lang="en-ZA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking Manager | PaPa Gs Cutz</title><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="js/config.js"></script><script defer src="js/app.js"></script></head><body><div class="topbar">PRIVATE BUSINESS TOOLS</div><header class="site-header"><a class="brand" href="index.html">PaPa Gs <span>Cutz</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰ Menu</button><nav id="main-nav" class="nav"><a href="index.html">Home</a><a href="account.html">My account</a><button class="btn outline" data-logout type="button">Log out</button></nav></header><section class="page-hero"><p class="eyebrow">OWNER ONLY</p><h1>Booking manager.</h1><p>Review booking requests and update appointment status.</p></section><main class="content-wrap" data-admin><div data-message class="notice hidden" role="status" aria-live="polite"></div><div class="notice warning">This page's controls are backed by database security policies. Configure your owner profile in Supabase before using it. Never put a service-role key in the website.</div><div data-admin-table class="form-card">Checking owner access and loading requests…</div></main><footer class="footer"><div><a class="brand" href="index.html">PaPa Gs <span>Cutz</span></a></div><div class="footer-links"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="booking-policy.html">Booking Policy</a><a href="payments.html">Payments</a></div><small>© <span data-year></span> PaPa Gs Cutz.</small></footer></body></html>
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Booking Manager | PaPa Gs Cutz</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application configuration and logic -->
+  <script defer src="js/config.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+
+<body>
+  <!-- Private business tools -->
+  <div class="topbar">
+    PRIVATE BUSINESS TOOLS
+  </div>
+
+  <!-- Header and navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      PaPa Gs <span>Cutz</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      type="button"
+    >
+      ☰ Menu
+    </button>
+
+    <nav id="main-nav" class="nav">
+      <a href="index.html">Home</a>
+      <a href="account.html">My account</a>
+
+      <button class="btn outline" data-logout type="button">
+        Log out
+      </button>
+    </nav>
+  </header>
+
+  <!-- Booking manager introduction -->
+  <section class="page-hero">
+    <p class="eyebrow">OWNER ONLY</p>
+
+    <h1>Booking manager.</h1>
+
+    <p>
+      Review booking requests and update appointment status.
+    </p>
+  </section>
+
+  <!-- Protected booking manager -->
+  <main class="content-wrap" data-admin>
+    <div
+      data-message
+      class="notice hidden"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <div class="notice warning">
+      This page's controls are backed by database security policies.
+      Configure your owner profile in Supabase before using it.
+      Never put a service-role key in the website.
+    </div>
+
+    <div data-admin-table class="form-card">
+      Checking owner access and loading requests…
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <a class="brand" href="index.html">
+        PaPa Gs <span>Cutz</span>
+      </a>
+    </div>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="booking-policy.html">Booking Policy</a>
+      <a href="payments.html">Payments</a>
+    </div>
+
+    <small>
+      © <span data-year></span> PaPa Gs Cutz.
+    </small>
+  </footer>
+</body>
+</html>
