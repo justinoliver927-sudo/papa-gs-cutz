@@ -1,1 +1,120 @@
-<!doctype html><html lang="en-ZA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Account | PaPa Gs Cutz</title><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="js/config.js"></script><script defer src="js/app.js"></script></head><body><div class="topbar">PA PA GS CUTZ · ACCOUNT</div><header class="site-header"><a class="brand" href="index.html">PaPa Gs <span>Cutz</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰ Menu</button><nav id="main-nav" class="nav"><a href="index.html">Home</a><a href="services.html">Services</a><a href="booking.html">Book a cut</a><a href="contact.html">Contact</a><a class="active" href="account.html">My account</a><button class="btn outline" data-logout type="button">Log out</button></nav></header><section class="page-hero"><p class="eyebrow">YOUR ACCOUNT</p><h1>Good to see you.</h1><p>Signed in as <strong data-user-email>checking session…</strong></p></section><main class="content-wrap" data-account><div data-message class="notice hidden" role="status" aria-live="polite"></div><h2>Your booking requests</h2><div data-my-bookings class="form-card">Loading your requests…</div><div data-admin-only class="notice hidden"><strong>Business owner tools</strong><p>You have owner access configured. Use the booking management page to review requests.</p><a class="btn dark" href="admin.html">Open booking manager</a></div><p class="muted">Only requests associated with your signed-in account appear here. WhatsApp requests sent while signed out may not appear in this list.</p></main><footer class="footer"><div><a class="brand" href="index.html">PaPa Gs <span>Cutz</span></a></div><div class="footer-links"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="booking-policy.html">Booking Policy</a><a href="payments.html">Payments</a></div><small>© <span data-year></span> PaPa Gs Cutz.</small></footer></body></html>
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Your Account | PaPa Gs Cutz</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application configuration and logic -->
+  <script defer src="js/config.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+
+<body>
+  <!-- Top bar -->
+  <div class="topbar">
+    PA PA GS CUTZ · ACCOUNT
+  </div>
+
+  <!-- Header and navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      PaPa Gs <span>Cutz</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      type="button"
+    >
+      ☰ Menu
+    </button>
+
+    <nav id="main-nav" class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="booking.html">Book a cut</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="account.html">My account</a>
+
+      <button class="btn outline" data-logout type="button">
+        Log out
+      </button>
+    </nav>
+  </header>
+
+  <!-- Account introduction -->
+  <section class="page-hero">
+    <p class="eyebrow">YOUR ACCOUNT</p>
+
+    <h1>Good to see you.</h1>
+
+    <p>
+      Signed in as
+      <strong data-user-email>checking session…</strong>
+    </p>
+  </section>
+
+  <!-- Account content -->
+  <main class="content-wrap" data-account>
+    <div
+      data-message
+      class="notice hidden"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <h2>Your booking requests</h2>
+
+    <div data-my-bookings class="form-card">
+      Loading your requests…
+    </div>
+
+    <!-- Owner-only tools -->
+    <div data-admin-only class="notice hidden">
+      <strong>Business owner tools</strong>
+
+      <p>
+        You have owner access configured. Use the booking management page
+        to review requests.
+      </p>
+
+      <a class="btn dark" href="admin.html">
+        Open booking manager
+      </a>
+    </div>
+
+    <p class="muted">
+      Only requests associated with your signed-in account appear here.
+      WhatsApp requests sent while signed out may not appear in this list.
+    </p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <a class="brand" href="index.html">
+        PaPa Gs <span>Cutz</span>
+      </a>
+    </div>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="booking-policy.html">Booking Policy</a>
+      <a href="payments.html">Payments</a>
+    </div>
+
+    <small>
+      © <span data-year></span> PaPa Gs Cutz.
+    </small>
+  </footer>
+</body>
+</html>
