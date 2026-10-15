@@ -5,6 +5,50 @@
  const cfg=window.PAPA_CONFIG||{}; let sb=null;
  if(window.supabase&&cfg.supabaseUrl&&cfg.supabasePublishableKey&&!cfg.supabaseUrl.includes('PASTE_')&&!cfg.supabasePublishableKey.includes('PASTE_')) sb=window.supabase.createClient(cfg.supabaseUrl,cfg.supabasePublishableKey);
  window.PapaApp={client:()=>sb,configured:()=>!!sb,escape:s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))};
+ 
+window.PapaCaptchaToken = '';
+
+window.PapaRenderCaptcha = () => {
+  const box = document.querySelector('[data-turnstile]');
+
+  if (!box || !window.turnstile || box.dataset.turnstileRendered) {
+    return;
+  }
+
+  box.dataset.turnstileRendered = 'true';
+
+  window.turnstile.render(box, {
+    sitekey: '0x4AAAAAAFX8PZdhuaKZBthB',
+    callback: token => {
+      window.PapaCaptchaToken = token;
+    },
+    'expired-callback': () => {
+      window.PapaCaptchaToken = '';
+    },
+    'error-callback': () => {
+      window.PapaCaptchaToken = '';
+    }
+  });
+};
+
+window.PapaResetCaptcha = () => {
+  window.PapaCaptchaToken = '';
+
+  if (window.turnstile) {
+    const box = document.querySelector('[data-turnstile]');
+
+    if (box && box.dataset.turnstileRendered === 'true') {
+      window.turnstile.reset();
+    }
+  }
+};
+
+if (window.turnstile) {
+  window.PapaRenderCaptcha();
+} else {
+  window.addEventListener('load', window.PapaRenderCaptcha, { once: true });
+}
+
  const msg=$('[data-message]');function feedback(text,ok=false){if(msg){msg.textContent=text;msg.classList.remove('hidden','warning');if(!ok)msg.classList.add('warning');}}
  const authForm=$('[data-auth-form]'); if(authForm) authForm.addEventListener('submit',async e=>{e.preventDefault();if(!sb){feedback('Supabase is not configured yet. Open js/config.js and add your project URL and publishable key.');return;}const mode=authForm.dataset.authForm,email=$('#email')?.value.trim(),password=$('#password')?.value,name=$('#fullName')?.value.trim();let result;
  try{if(mode==='signup'){result=await sb.auth.signUp({email,password,options:{data:{full_name:name||''},emailRedirectTo:location.origin+location.pathname.replace(/[^/]*$/,'login.html')}});if(!result.error)feedback('Account created. Check your email if confirmation is enabled, then log in.',true);}else{result=await sb.auth.signInWithPassword({email,password});if(!result.error){feedback('You are signed in. Opening your account…',true);setTimeout(()=>location.href='account.html',600);}}if(result?.error)feedback(result.error.message);}catch(err){feedback(err.message||'Could not complete the request.');}});
