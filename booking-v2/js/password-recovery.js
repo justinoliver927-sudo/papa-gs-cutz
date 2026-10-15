@@ -37,10 +37,22 @@
         return;
       }
 
+if (!window.PapaCaptchaToken) {
+  showMessage('Please complete the security check first.');
+  return;
+}
+
       try {
-        const { error } = await client.auth.resetPasswordForEmail(email, {
-          redirectTo: new URL('reset-password.html', location.href).href
-        });
+        
+const { error } = await client.auth.resetPasswordForEmail(email, {
+  redirectTo: new URL('reset-password.html', location.href).href,
+  captchaToken: window.PapaCaptchaToken
+});
+
+if (window.PapaResetCaptcha) {
+  window.PapaResetCaptcha();
+}
+
 
         if (error) {
           showMessage(error.message);
