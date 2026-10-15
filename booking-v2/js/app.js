@@ -51,11 +51,22 @@ if (window.turnstile) {
 
  const msg=$('[data-message]');function feedback(text,ok=false){if(msg){msg.textContent=text;msg.classList.remove('hidden','warning');if(!ok)msg.classList.add('warning');}}
  const authForm=$('[data-auth-form]'); if(authForm) authForm.addEventListener('submit',async e=>{e.preventDefault();if(!sb){feedback('Supabase is not configured yet. Open js/config.js and add your project URL and publishable key.');return;}const mode=authForm.dataset.authForm,email=$('#email')?.value.trim(),password=$('#password')?.value,name=$('#fullName')?.value.trim();let result;
+                                                                                                 
+if (!window.PapaCaptchaToken) {
+  feedback('Please complete the security check first.');
+  return;
+}
+
  try{if(mode==='signup'){
 result=await sb.auth.signUp({email,password,options:{captchaToken:window.PapaCaptchaToken,data:{full_name:name||''},emailRedirectTo:location.origin+location.pathname.replace(/[^/]*$/,'login.html')}});
 if(!result.error)feedback('Account created. Check your email if confirmation is enabled, then log in.',true);}else{
 result=await sb.auth.signInWithPassword({email,password,options:{captchaToken:window.PapaCaptchaToken}});
-if(!result.error){feedback('You are signed in. Opening your account…',true);setTimeout(()=>location.href='account.html',600);}}if(result?.error)feedback(result.error.message);}catch(err){feedback(err.message||'Could not complete the request.');}});
+if(!result.error){feedback('You are signed in. Opening your account…',true);setTimeout(()=>location.href='account.html',600);}}if(result?.error)feedback(result.error.message);
+    if (window.PapaResetCaptcha) window.PapaResetCaptcha();
+    }catch(err){
+  feedback(err.message||'Could not complete the request.');
+  if (window.PapaResetCaptcha) window.PapaResetCaptcha();
+}});
  const logout=$('[data-logout]');if(logout)logout.addEventListener('click',async()=>{if(sb)await sb.auth.signOut();location.href='index.html';});
  const booking=$('[data-booking-form]');if(booking)booking.addEventListener('submit',async e=>{e.preventDefault();if(!booking.reportValidity())return;const fd=new FormData(booking),data=Object.fromEntries(fd.entries());if(!$('#agreeTerms')?.checked){feedback('Please accept the booking terms before continuing.');return;}const price=Number(data.price||0);const message=['💈 *PaPa Gs Cutz — Booking Request*','',`*Service:* ${data.service}`,`*Price:* R${price}`,`*Preferred date:* ${data.booking_date}`,`*Preferred time:* ${data.booking_time}`,`*Customer:* ${data.customer_name}`,`*Contact:* ${data.customer_phone}`,data.notes?`*Notes:* ${data.notes}`:'','Please confirm availability. I understand this request is not confirmed until the barber replies.'].filter(Boolean).join('\n');let saved=false;if(sb){const {data:{user}}=await sb.auth.getUser();const {error}=await sb.from('booking_requests').insert({user_id:user?.id||null,customer_name:data.customer_name,customer_phone:data.customer_phone,service_name:data.service,service_price:price,booking_date:data.booking_date,booking_time:data.booking_time,notes:data.notes||null,terms_accepted:true,status:'pending'});if(error){feedback('Booking was not saved to the database ('+error.message+'). You can still send a WhatsApp request.',false);}else{saved=true;feedback('Booking request saved. WhatsApp will open so the barber can confirm it.',true);}}else feedback('Supabase is not connected. WhatsApp will open; this request will not be stored in the website database.',false);const url='https://wa.me/27781594855?text='+encodeURIComponent(message);window.open(url,'_blank','noopener,noreferrer');if(saved)booking.reset();});
  const date=$('#booking_date');if(date){const now=new Date(),today=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');date.min=today;}
