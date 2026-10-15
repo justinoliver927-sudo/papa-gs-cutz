@@ -148,6 +148,17 @@
       (sum, booking) => sum + approvedPrice(booking.service_name), 0
     );
 
+const paidValue = knownActive
+  .filter((booking) => booking.payment_status === "paid")
+  .reduce((sum, booking) => sum + approvedPrice(booking.service_name), 0);
+
+const unpaidValue = knownActive
+  .filter((booking) => booking.payment_status !== "paid")
+  .reduce((sum, booking) => sum + approvedPrice(booking.service_name), 0);
+
+$("#paidValue").textContent = money(paidValue);
+$("#unpaidValue").textContent = money(unpaidValue);
+
     $("#totalValue").textContent = money(totalValue);
     $("#outstandingValue").textContent = money(outstandingValue);
     $("#completedValue").textContent = money(completedValue);
@@ -198,7 +209,29 @@
           <td>${escapeHTML(booking.booking_date || "—")}</td>
           <td>${escapeHTML(booking.booking_time || "—")}</td>
           <td>${displayPrice}</td>
-          <td class="status">${escapeHTML(booking.status || "unknown")}</td>
+<td class="status">${escapeHTML(booking.status || "unknown")}</td>
+<td>
+  <label>
+    Payment
+    <select data-payment-status="${escapeHTML(booking.id)}">
+      <option value="unpaid" ${booking.payment_status !== "paid" ? "selected" : ""}>Unpaid</option>
+      <option value="paid" ${booking.payment_status === "paid" ? "selected" : ""}>Paid</option>
+    </select>
+  </label>
+  <label>
+    Method
+    <select data-payment-method="${escapeHTML(booking.id)}">
+      <option value="" ${!booking.payment_method ? "selected" : ""}>Not recorded</option>
+      <option value="cash" ${booking.payment_method === "cash" ? "selected" : ""}>Cash</option>
+      <option value="card" ${booking.payment_method === "card" ? "selected" : ""}>Card</option>
+      <option value="eft" ${booking.payment_method === "eft" ? "selected" : ""}>EFT</option>
+      <option value="other" ${booking.payment_method === "other" ? "selected" : ""}>Other</option>
+    </select>
+  </label>
+  <button class="action primary" type="button"
+    data-save-payment="${escapeHTML(booking.id)}">Save payment</button>
+</td>
+
         </tr>
       `;
     }).join("");
@@ -208,7 +241,10 @@
           <thead>
             <tr>
               <th>Customer</th><th>Service</th><th>Date</th>
-              <th>Time</th><th>Approved value</th><th>Status</th>
+              <th>Time</th>
+<th>Approved value</th>
+<th>Booking status</th>
+<th>Payment tracking</th>
             </tr>
           </thead>
           <tbody>${bookingRows}</tbody>
@@ -241,15 +277,23 @@
     try {
       const { data, error } = await sb
         .from("booking_requests")
-        .select(
-          "id,customer_name,service_name,service_price,booking_date,booking_time,status,created_at"
-        )
+        
+.select(
+  "id,customer_name,service_name,service_price,booking_date,booking_time,status,created_at,payment_status,payment_method,paid_at"
+)
+
         .order("booking_date", { ascending: false })
         .limit(1000);
 
       if (error) throw error;
 
-      allBookings = data || [];
+     
+allBookings = (data || []).map((booking) => ({
+  ...booking,
+  payment_status: booking.payment_status || "unpaid",
+  payment_method: booking.payment_method || ""
+}));
+
       render();
       say(`Loaded ${allBookings.length} booking record(s).`);
     } catch (error) {
@@ -340,6 +384,65 @@ $("#statusFilter").addEventListener("change", render);
 
 $("#refreshButton").addEventListener("click", loadBookings);
 
+
+$("#bookingTable").addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-save-payment]");
+  if (!button) return;
+
+  const id = button.dataset.savePayment;
+  const statusSelect = $("#bookingTable").querySelector(
+    `[data-payment-status="${CSS.escape(id)}"]`
+  );
+  const methodSelect = $("#bookingTable").querySelector(
+    `[data-payment-method="${CSS.escape(id)}"]`
+  );
+
+  if (!statusSelect || !methodSelect) return;
+
+  const paymentStatus = statusSelect.value;
+  const paymentMethod = methodSelect.value || null;
+  const oldText = button.textContent;
+  const current = allBookings.find(
+    (booking) => String(booking.id) === String(id)
+  );
+
+  button.disabled = true;
+  button.textContent = "Saving…";
+
+  try {
+    const update = {
+      payment_status: paymentStatus,
+      payment_method: paymentStatus === "paid" ? paymentMethod : null,
+      paid_at: paymentStatus === "paid"
+        ? (current?.paid_at || new Date().toISOString())
+        : null
+    };
+
+    const { data, error } = await sb
+      .from("booking_requests")
+      .update(update)
+      .eq("id", id)
+      .select("id");
+
+    if (error) throw error;
+    if (!data || data.length === 0) {
+      throw new Error("No booking was updated. Check owner permissions.");
+    }
+
+    allBookings = allBookings.map((booking) =>
+      String(booking.id) === String(id)
+        ? { ...booking, ...update, payment_method: update.payment_method || "" }
+        : booking
+    );
+
+    render();
+    say("Payment record saved successfully.");
+  } catch (error) {
+    say("Could not save payment: " + (error.message || "Unknown error"), true);
+    button.disabled = false;
+    button.textContent = oldText;
+  }
+});
 
       $("#logoutButton").addEventListener("click", async () => {
         await sb.auth.signOut();
