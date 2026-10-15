@@ -308,15 +308,38 @@
         to.disabled = !custom;
       }
 
-      range.addEventListener("change", () => {
-        updateDateInputs();
-        render();
-      });
+      
+range.addEventListener("change", () => {
+  updateDateInputs();
 
-      from.addEventListener("change", render);
-      to.addEventListener("change", render);
-      $("#statusFilter").addEventListener("change", render);
-      $("#refreshButton").addEventListener("click", loadBookings);
+  if (range.value === "today") {
+    const today = localDate(new Date());
+    from.value = today;
+    to.value = today;
+  } else if (range.value === "week") {
+    const today = new Date();
+    const start = new Date(today);
+    start.setDate(start.getDate() - 6);
+    from.value = localDate(start);
+    to.value = localDate(today);
+  } else if (range.value === "month") {
+    const today = new Date();
+    from.value = `${today.getFullYear()}-${String(
+      today.getMonth() + 1
+    ).padStart(2, "0")}-01`;
+    to.value = localDate(today);
+  }
+
+  render();
+});
+
+from.addEventListener("change", render);
+to.addEventListener("change", render);
+
+$("#statusFilter").addEventListener("change", render);
+
+$("#refreshButton").addEventListener("click", loadBookings);
+
 
       $("#logoutButton").addEventListener("click", async () => {
         await sb.auth.signOut();
