@@ -3,7 +3,7 @@
   const resetForm = document.querySelector('[data-reset-password]');
   const message = document.querySelector('[data-message]');
   const cfg = window.PAPA_CONFIG || {};
-
+  
   const showMessage = (text, success = false) => {
     if (!message) return;
     message.textContent = text;
