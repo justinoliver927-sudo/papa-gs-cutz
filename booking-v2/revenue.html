@@ -197,7 +197,17 @@
           <div class="metric" id="bookingCount">0</div>
           <small id="cancelledCount">0 cancelled in selected results</small>
         </div>
-      </section>
+        <div class="card">
+  <div class="muted">Paid revenue</div>
+  <div class="metric green" id="paidValue">R0.00</div>
+  <small>Recognised bookings marked paid</small>
+</div>
+<div class="card">
+  <div class="muted">Unpaid value</div>
+  <div class="metric" id="unpaidValue">R0.00</div>
+  <small>Recognised bookings not marked paid</small>
+</div>
+</section>
 
       <section class="section">
         <h2>Service breakdown</h2>
@@ -222,8 +232,7 @@
   </main>
 
   <footer class="wrap">
-    PaPa Gs Cutz · Private owner dashboard · Booking values are estimates,
-    not a payment ledger.
+    PaPa Gs Cutz · Private owner dashboard · **Important:** Booking values are estimates based on the approved service prices. Paid revenue includes bookings you have marked as paid; verify receipt of payment before recording it. Cancelled bookings are excluded from the totals.
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
