@@ -10,6 +10,7 @@
 
   <!-- Supabase client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 
   <!-- Application configuration and logic -->
   <script defer src="js/config.js"></script>
@@ -104,7 +105,12 @@
           required
         >
       </div>
-
+<div class="field">
+  <label>Security check</label>
+  <div data-turnstile></div>
+  <small class="muted">Complete this check before continuing.</small>
+</div>
+      
       <label class="checkbox-row">
         <input type="checkbox" required>
 
