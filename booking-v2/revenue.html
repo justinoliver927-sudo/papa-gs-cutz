@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#0b1f33">
+  <title>Booking Value Dashboard | PaPa Gs Cutz</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --navy: #0b1f33;
+      --panel: #132d43;
+      --green: #20c879;
+      --white: #f5f8fb;
+      --muted: #b8c8d5;
+      --border: #2b465b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--navy);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    header {
+      padding: 22px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #081827;
+    }
+    .wrap { width: min(1100px, 100% - 28px); margin: auto; }
+    h1 { margin: 0 0 5px; font-size: 1.65rem; }
+    h2 { font-size: 1.1rem; margin-top: 0; }
+    .muted, small { color: var(--muted); }
+    .green { color: var(--green); }
+    .top-actions {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;
+    }
+    a, button {
+      cursor: pointer;
+      font: inherit;
+    }
+    .action {
+      display: inline-block;
+      padding: 10px 13px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--white);
+      text-decoration: none;
+    }
+    button.action { color: var(--white); }
+    .primary { background: var(--green); color: #062719 !important; font-weight: bold; }
+    main { padding: 22px 0 40px; }
+    .notice {
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 18px;
+      background: var(--panel);
+    }
+    .notice.warning { border-color: #d69b3a; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .card, .section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+      min-width: 0;
+    }
+    .metric { font-size: clamp(1.45rem, 5vw, 2rem); font-weight: 700; overflow-wrap: anywhere; }
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    label { display: block; font-size: .9rem; color: var(--muted); }
+    input, select {
+      width: 100%;
+      margin-top: 5px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #081827;
+      color: var(--white);
+      min-height: 43px;
+    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th, td {
+      padding: 11px 9px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--green); }
+    .status { text-transform: capitalize; }
+    .section { margin-top: 17px; }
+    .hidden { display: none !important; }
+    #loading { padding: 20px 0; }
+    footer { padding: 18px 0; color: var(--muted); font-size: .85rem; }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.35rem; }
+      .card, .section { padding: 13px; }
+      th, td { padding: 9px 7px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>💈 PaPa Gs Cutz</h1>
+      <div class="green">Owner Booking Value Dashboard</div>
+      <div class="top-actions">
+        <a class="action" href="admin.html">Booking Manager</a>
+        <a class="action" href="account.html">My Account</a>
+        <button class="action" id="logoutButton" type="button">Log out</button>
+      </div>
+    </div>
+  </header>
 
+  <main class="wrap">
+    <div id="message" class="notice" role="status" aria-live="polite">
+      Checking owner access…
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <div class="notice warning">
+        <strong>Important:</strong> These figures show the value of bookings,
+        not payments received. Cancelled bookings are excluded from booking
+        value. Services that do not match the approved price list are flagged
+        for review rather than included in the totals.
+      </div>
+
+      <section class="section">
+        <h2>Filter bookings</h2>
+        <div class="filters">
+          <label>
+            Date range
+            <select id="dateRange">
+              <option value="all">All dates</option>
+              <option value="today">Today</option>
+              <option value="week">Last 7 days</option>
+              <option value="month">This month</option>
+              <option value="custom">Custom dates</option>
+            </select>
+          </label>
+          <label>
+            From
+            <input id="dateFrom" type="date" disabled>
+          </label>
+          <label>
+            To
+            <input id="dateTo" type="date" disabled>
+          </label>
+          <label>
+            Booking status
+            <select id="statusFilter">
+              <option value="all">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </label>
+        </div>
+        <button class="action primary" id="refreshButton" type="button">
+          Refresh bookings
+        </button>
+      </section>
+
+      <section class="cards" aria-label="Booking totals">
+        <div class="card">
+          <div class="muted">Total booking value</div>
+          <div class="metric green" id="totalValue">R0.00</div>
+          <small>All non-cancelled bookings</small>
+        </div>
+        <div class="card">
+          <div class="muted">Pending + confirmed</div>
+          <div class="metric" id="outstandingValue">R0.00</div>
+          <small>Appointments not yet completed</small>
+        </div>
+        <div class="card">
+          <div class="muted">Completed cut value</div>
+          <div class="metric" id="completedValue">R0.00</div>
+          <small>Completed appointments only</small>
+        </div>
+        <div class="card">
+          <div class="muted">Non-cancelled bookings</div>
+          <div class="metric" id="bookingCount">0</div>
+          <small id="cancelledCount">0 cancelled in selected results</small>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Service breakdown</h2>
+        <div id="serviceBreakdown" class="table-wrap">
+          No bookings loaded.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Booking records</h2>
+        <p class="muted">Only services matched to the approved price list are valued.</p>
+        <div id="bookingTable" class="table-wrap">No bookings loaded.</div>
+      </section>
+
+      <section class="section">
+        <h2>Price review</h2>
+        <p id="unknownSummary" class="muted">No unrecognised services.</p>
+        <div id="unknownTable" class="table-wrap"></div>
+      </section>
+    </div>
+    <div id="loading" class="muted">Loading dashboard…</div>
+  </main>
+
+  <footer class="wrap">
+    PaPa Gs Cutz · Private owner dashboard · Booking values are estimates,
+    not a payment ledger.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/revenue.js"></script>
+</body>
+</html>
