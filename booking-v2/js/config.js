@@ -1,4 +1,4 @@
-/* Public browser configuration only. Never put a Supabase service_role/secret key here. */
+/* Public browser configuration only. Never put a privileged Supabase secret key here. */
 window.PAPA_CONFIG = {
   supabaseUrl: "https://gtgrnrehmevyzxpkecce.supabase.co",
   supabasePublishableKey: "sb_publishable_YBEO4xIE-iWIXYpcjsaz7Q_KJY-7mhd",

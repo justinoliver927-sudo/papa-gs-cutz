@@ -1,0 +1,50 @@
+name: Site Security Audit
+
+on:
+  push:
+    branches: [main, security-suite-review]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Run frontend security audit
+        run: python tools/site_audit.py
+      - name: Run safe static checks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+
+          files = [Path("index.html"), Path("booking-v2/index.html"), Path("booking-v2/admin.html")]
+          found = [p for p in files if p.is_file()]
+          if not found:
+              print("ERROR: No expected HTML files found.")
+              sys.exit(1)
+
+          failed = False
+          for path in found:
+              content = path.read_text(encoding="utf-8", errors="replace")
+              if "<html" not in content.lower():
+                  print(f"WARNING: {path} may not be a complete HTML page.")
+              if "TODO_REPLACE_WITH_REAL_SECRET" in content:
+                  print(f"ERROR: Placeholder secret found in {path}")
+                  failed = True
+              print(f"Checked {path}")
+
+          if failed:
+              sys.exit(1)
+          print("Basic static checks completed. This is not a full security audit.")
+          PY
