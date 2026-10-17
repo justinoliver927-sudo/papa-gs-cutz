@@ -1,0 +1,5 @@
+
+project_id = "gtgrnrehmevyzxpkecce"
+
+[functions.submit-booking]
+verify_jwt = false
