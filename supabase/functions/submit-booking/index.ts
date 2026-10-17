@@ -86,6 +86,16 @@ Deno.serve(async (req: Request) => {
   if (body.notes != null && body.notes !== "" && notes === null) return json(400, { error: "Notes must be 1,000 characters or fewer." }, origin);
   if (body.terms_accepted !== true) return json(400, { error: "Please accept the booking terms." }, origin);
   if (!captchaToken) return json(400, { error: "Complete the security check first." }, origin);
+  const [year, month, day] = bookingDate.split("-").map(Number);
+const parsedDate = new Date(Date.UTC(year, month - 1, day));
+
+if (
+  parsedDate.getUTCFullYear() !== year ||
+  parsedDate.getUTCMonth() !== month - 1 ||
+  parsedDate.getUTCDate() !== day
+) {
+  return json(400, { error: "Choose a valid calendar date." }, origin);
+}
 
   // Verify Turnstile on the server. Never trust a browser-supplied success flag.
   let captchaResponse: Response;
@@ -102,9 +112,11 @@ Deno.serve(async (req: Request) => {
   if (!captchaResponse.ok || !captchaResult?.success) {
     return json(400, { error: "Security check expired or failed. Please try again." }, origin);
   }
-  if (captchaResult.hostname && captchaResult.hostname !== "justinoliver927-sudo.github.io") {
-    return json(400, { error: "Security check host did not match." }, origin);
-  }
+  
+if (captchaResult.hostname !== "justinoliver927-sudo.github.io") {
+  return json(400, { error: "Security check host did not match." }, origin);
+}
+
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
