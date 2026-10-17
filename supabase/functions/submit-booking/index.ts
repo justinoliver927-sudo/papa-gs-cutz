@@ -78,7 +78,11 @@ Deno.serve(async (req: Request) => {
   if (!customerPhone || !/^[+0-9() .-]{3,30}$/.test(customerPhone)) {
     return json(400, { error: "Enter a valid phone number." }, origin);
   }
-  if (!serviceName || !(serviceName in services)) return json(400, { error: "Choose a listed service." }, origin);
+  
+if (!serviceName || !Object.hasOwn(services, serviceName)) {
+  return json(400, { error: "Choose a listed service." }, origin);
+}
+
   if (!bookingDate || !/^\d{4}-\d{2}-\d{2}$/.test(bookingDate)) return json(400, { error: "Choose a valid booking date." }, origin);
   const todaySA = new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Johannesburg", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
   if (bookingDate < todaySA) return json(400, { error: "Choose today or a future date." }, origin);
